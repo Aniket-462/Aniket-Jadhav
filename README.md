@@ -1,4 +1,4 @@
-# Aniket-Jadhav
+LIBRARY MANAGEMENT SYSTEM
 import java.util.ArrayList;
 
 class Book {
@@ -47,7 +47,7 @@ class LibraryCatalog {
     public ArrayList<Book> searchByTitle(String title) {
         ArrayList<Book> result = new ArrayList<>();
         for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title)) {
+            if (book.getTitle() != null && book.getTitle().equalsIgnoreCase(title)) {
                 result.add(book);
             }
         }
@@ -57,7 +57,7 @@ class LibraryCatalog {
     public ArrayList<Book> searchByAuthor(String author) {
         ArrayList<Book> result = new ArrayList<>();
         for (Book book : books) {
-            if (book.getAuthor().equalsIgnoreCase(author)) {
+            if (book.getAuthor() != null && book.getAuthor().equalsIgnoreCase(author)) {
                 result.add(book);
             }
         }
@@ -66,7 +66,7 @@ class LibraryCatalog {
 
     public void checkOutBook(String title) {
         for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title) && !book.isCheckedOut()) {
+            if (book.getTitle() != null && book.getTitle().equalsIgnoreCase(title) && !book.isCheckedOut()) {
                 book.checkOut();
                 System.out.println("Book \"" + title + "\" checked out successfully.");
                 return;
@@ -77,13 +77,22 @@ class LibraryCatalog {
 
     public void returnBook(String title) {
         for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title) && book.isCheckedOut()) {
+            if (book.getTitle() != null && book.getTitle().equalsIgnoreCase(title) && book.isCheckedOut()) {
                 book.returnBook();
                 System.out.println("Book \"" + title + "\" returned successfully.");
                 return;
             }
         }
         System.out.println("Book \"" + title + "\" was not checked out.");
+    }
+
+    public boolean isCheckedOut(String title) {
+        for (Book book : books) {
+            if (book.getTitle() != null && book.getTitle().equalsIgnoreCase(title)) {
+                return book.isCheckedOut();
+            }
+        }
+        return false;
     }
 }
 
